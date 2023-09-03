@@ -16,7 +16,8 @@
 
   <!-- slider stylesheet -->
   <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -40,7 +41,8 @@
               Segurança C.O.
             </span>
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
@@ -57,10 +59,10 @@
                   <a class="nav-link" href="#we_do"> O que fazemos ? </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="portfolio.html"> Artigos </a>
+                  <a class="nav-link" href="#articles"> Artigos </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Fale Conosco</a>
+                  <a class="nav-link" href="#contato-info">Fale Conosco</a>
                 </li>
               </ul>
               <div class="user_option">
@@ -120,7 +122,8 @@
                         Blog voltado para segurança
                       </h2>
                       <p>
-                        Trazemos pesquisas e fontes confiáveis sobre o tema de maneira clara e coloquial, para facilitar a compensão.
+                        Trazemos pesquisas e fontes confiáveis sobre o tema de maneira clara e coloquial, para facilitar
+                        a compensão.
                       </p>
                       <div class="">
                         <a href="">
@@ -167,7 +170,8 @@
           O que fazemos ?
         </h2>
         <p>
-          Reunimos fontes confiáveis e pesquisas fundamentadas, com intuíto de desmistificar este conhecimento facilitando o entendimento
+          Reunimos fontes confiáveis e pesquisas fundamentadas, com intuíto de desmistificar este conhecimento
+          facilitando o entendimento
         </p>
       </div>
       <div class="do_container">
@@ -237,10 +241,15 @@
             <p>
               Estudantes de computação
             </p>
-            <div>
-              <a href="">
-                Read More
-              </a>
+            <div class="row">
+              <div class="col">
+                <img style="width: 180px;" src="images/joao.jpg" alt="foto-joao">
+                <p>João Paulo Carnellossi</p>
+              </div>
+              <div class="col">
+                <img style="width: 180px;" src="images/flavio.png" alt="foto-flavio">
+                <p>Flavio Granado Filho</p>
+              </div>
             </div>
           </div>
         </div>
@@ -259,7 +268,7 @@
           Artigo sobre segurança cibernética
         </h2>
         <p>
-          
+
         </p>
       </div>
       <div class="work_container layout_padding2">
@@ -268,195 +277,117 @@
         </div>
         <div class="box b-2">
           <img src="images/w-2.png" alt="">
-
         </div>
-        <div class="box b-3">
+        <div class="box b-3" id="articles">
           <img src="images/w-3.png" alt="">
-
         </div>
         <div class="box b-4">
           <img src="images/w-4.png" alt="">
-
         </div>
+
+        <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
+          <label for="arquivo" class="form-label">Selecione um arquivo:</label>
+          <input class="form-control" type="file" name="arquivo" id="arquivo">
+          <input  type="submit" value="Enviar">
+        </form> -->
       </div>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-md-3 text-center">
+            <h1 class="mb-5">Listagem de pesquisas</h1>
+            <ul>
+            <?php
+                $pdfDirectory = 'uploads/';
+                $pdfFiles = glob($pdfDirectory . '*.pdf');
+
+                if (empty($pdfFiles)) {
+                    echo "<p>Nenhum PDF encontrado.</p>";
+                } else {
+                    foreach ($pdfFiles as $pdfFile) {
+                        $pdfFileName = basename($pdfFile);
+                        echo "<li><a href='$pdfFile' download>$pdfFileName</a></li>";
+                    }
+                }
+            ?>
+            </ul>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col text-center">
+        <h2 class="mt-5">Enviar uma pesquisa</h2>
+      </div>
+    </div>
+    <div class="mt-5 row justify-content-center">
+      <div class="col-6">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input placeholder="Escolher arquivo..." type="file" name="arquivo" class="custom-file-input"
+                id="arquivo">
+              <label class="custom-file-label" for="arquivo" aria-describedby="inputGroupFileAddon02">Escolha um
+                arquivo</label>
+            </div>
+            <div class="input-group-append">
+              <button type="submit" class="input-group-text">Enviar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form action="excluir_pdf.php" method="post">
+          <label for="pdfFile">Selecione o PDF para excluir:</label>
+          <select class="form-control" name="pdfFile" id="pdfFile">
+              <?php
+              $pdfDirectory = 'uploads/';
+              $pdfFiles = glob($pdfDirectory . '*.pdf');
+
+              foreach ($pdfFiles as $pdfFile) {
+                  $pdfFileName = basename($pdfFile);
+                  echo "<option value='$pdfFileName'>$pdfFileName</option>";
+              }
+              ?>
+          </select>
+      </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-3 mt-3">
+          <input class="form-control btn-primary" type="submit" value="Excluir PDF">
+        </div>
+      </div>
+      </form>
   </section>
-
   <!-- end work section -->
-
   <!-- client section -->
   <section class="client_section">
     <div class="container">
       <div class="heading_container">
         <h2>
-          WHAT CUSTOMERS SAY
+          O que os especialistas dizem sobre as ameaças cibernéticas ?
         </h2>
       </div>
       <div class="carousel-wrap ">
         <div class="owl-carousel">
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/c-1.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Tempor incididunt <br>
-                  <span>
-                    Dipiscing elit
-                  </span>
-                </h5>
-                <img src="images/quote.png" alt="">
-                <p>
-                  Dipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                </p>
-              </div>
+            <div class="item">
+                <div class="box">
+                    <div class="detail-box">
+                        <h5>
+                        IBM Security X-Force <br>
+                        </h5>
+                        <img src="images/quote.png" alt="">
+                        <p>
+                        Segundo o grupo de pesquisa X-Force, o tempo de disseminação dos ataques ransomware diminuiram cerca
+                        de 95%, o que quer dizer que estão mais rápidos e efetivos.
+                        </p>
+                    </div>
+                </div>  
             </div>
-          </div>
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/c-2.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Tempor incididunt <br>
-                  <span>
-                    Dipiscing elit
-                  </span>
-                </h5>
-                <img src="images/quote.png" alt="">
-                <p>
-                  Dipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/c-3.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Tempor incididunt <br>
-                  <span>
-                    Dipiscing elit
-                  </span>
-                </h5>
-                <img src="images/quote.png" alt="">
-                <p>
-                  Dipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- end client section -->
-
-  <!-- target section -->
-  <section class="target_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 col-sm-6">
-          <div class="detail-box">
-            <h2>
-              1000+
-            </h2>
-            <h5>
-              Years of Business
-            </h5>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="detail-box">
-            <h2>
-              20000+
-            </h2>
-            <h5>
-              Projects Delivered
-            </h5>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="detail-box">
-            <h2>
-              10000+
-            </h2>
-            <h5>
-              Satisfied Customers
-            </h5>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="detail-box">
-            <h2>
-              1500+
-            </h2>
-            <h5>
-              Cups of Coffee
-            </h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end target section -->
-
-
-  <!-- contact section -->
-
-  <section class="contact_section layout_padding">
-    <div class="container">
-
-      <div class="heading_container">
-        <h2>
-          Request A Call Back
-        </h2>
-      </div>
-      <div class="">
-        <div class="">
-          <div class="row">
-            <div class="col-md-9 mx-auto">
-              <div class="contact-form">
-                <form action="">
-                  <div>
-                    <input type="text" placeholder="Full Name ">
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Phone Number">
-                  </div>
-                  <div>
-                    <input type="email" placeholder="Email Address">
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Message" class="input_message">
-                  </div>
-                  <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn_on-hover">
-                      Send
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="map_img-box">
-        <img src="images/map-img.png" alt="">
-      </div>
-    </div>
-  </section>
-
-
-  <!-- end contact section -->
-
 
   <!-- info section -->
   <section class="info_section ">
@@ -464,15 +395,15 @@
       <div class="row">
         <div class="col-md-3">
           <div class="info_contact">
-            <h5>
-              About Shop
+            <h5 id="contato-info">
+              Sobre a instituição
             </h5>
             <div>
               <div class="img-box">
                 <img src="images/location-white.png" width="18px" alt="">
               </div>
               <p>
-                Address
+                Av. Juscelino Kubitscheck, 1626
               </p>
             </div>
             <div>
@@ -480,7 +411,7 @@
                 <img src="images/telephone-white.png" width="12px" alt="">
               </div>
               <p>
-                +01 1234567890
+                +55 (43) 3375-7474
               </p>
             </div>
             <div>
@@ -488,19 +419,9 @@
                 <img src="images/envelope-white.png" width="18px" alt="">
               </div>
               <p>
-                demo@gmail.com
+                contato@unifil.br
               </p>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info_info">
-            <h5>
-              Informations
-            </h5>
-            <p>
-              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            </p>
           </div>
         </div>
 
@@ -510,57 +431,20 @@
               Instagram
             </h5>
             <div class="insta_container">
-              <div>
-                <a href="">
-                  <div class="insta-box b-1">
-                    <img src="images/insta.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-2">
-                    <img src="images/insta.png" alt="">
-                  </div>
-                </a>
-              </div>
-
-              <div>
-                <a href="">
-                  <div class="insta-box b-3">
-                    <img src="images/insta.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-4">
-                    <img src="images/insta.png" alt="">
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <div class="insta-box b-3">
-                    <img src="images/insta.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-4">
-                    <img src="images/insta.png" alt="">
-                  </div>
-                </a>
-              </div>
+                <div>
+                    <a href="">
+                    <div class="insta-box b-1">
+                        <a target="_blank" href="https://www.instagram.com/unifillondrina/">
+                            <img src="images/insta.png" alt="">
+                        </a>
+                    </div>
+                    </a>
+                </div>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="info_form ">
-            <h5>
-              Newsletter
-            </h5>
-            <form action="">
-              <input type="email" placeholder="Enter your email">
-              <button>
-                Subscribe
-              </button>
-            </form>
             <div class="social_box">
               <a href="">
                 <img src="images/fb.png" alt="">
@@ -583,15 +467,6 @@
 
   <!-- end info_section -->
 
-
-  <!-- footer section -->
-  <section class="container-fluid footer_section">
-    <p>
-      &copy; 2020 All Rights Reserved By
-      <a href="https://html.design/">Free Html Templates</a>
-    </p>
-  </section>
-  <!-- footer section -->
 
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
