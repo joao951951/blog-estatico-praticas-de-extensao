@@ -1,22 +1,27 @@
 <?php
-$pdfDirectory = 'uploads/';
+    session_start();
 
-if (isset($_POST['pdfFile'])) {
-    $pdfFileName = $_POST['pdfFile'];
-    $pdfPath = $pdfDirectory . $pdfFileName;
+    $pdfDirectory = 'uploads/';
 
-    if (file_exists($pdfPath)) {
-        if (unlink($pdfPath)) {
-            echo "O PDF '$pdfFileName' foi excluído com sucesso.";
-            header('Location: index.php');
-            exit;
+    if (isset($_POST['pdfFile'])) {
+        $pdfFileName = $_POST['pdfFile'];
+        $pdfPath = $pdfDirectory . $pdfFileName;
+
+        if (file_exists($pdfPath)) {
+            if (unlink($pdfPath)) {
+                $_SESSION['uploadMessage'] = "Arquivo '$pdfFileName' excluido com sucesso.";
+                header('Location: index.php#uploadSection');
+                exit;
+            } else {
+                $_SESSION['uploadMessage'] = "Erro ao excluir o arquivo '$pdfFileName'.";
+                header('Location: index.php#uploadSection');
+            }
         } else {
-            echo "Erro ao excluir o PDF '$pdfFileName'.";
+            $_SESSION['uploadMessage'] = "O arquivo especificado não existe.";
+            header('Location: index.php#uploadSection');
         }
     } else {
-        echo "O PDF '$pdfFileName' não existe.";
+        $_SESSION['uploadMessage'] = "Selecione um pdf para excluir.";
+        header('Location: index.php#uploadSection');
     }
-} else {
-    echo "Selecione um PDF para excluir.";
-}
 ?>

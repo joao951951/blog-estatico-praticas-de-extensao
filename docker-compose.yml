@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile
     container_name: nginx_php
     ports: 
-      - "40:80"
+      - "41:80"
     volumes:
       - ./src:/var/www/html
     depends_on:
@@ -29,20 +29,3 @@ services:
       - "9004:9004"
     networks: 
       - php
-
-
-  # mysql:
-  #   image: joao159159/mysql-pers:latest
-  #   restart: always
-  #   environment:
-  #     MYSQL_DATABASE: cfa
-  #     MYSQL_USER: cfa
-  #     MYSQL_PASSWORD: 159159
-  #     MYSQL_ROOT_PASSWORD: 159159
-  #     SERVICE_NAME: mysql
-  #   volumes:
-  #     - ./mysql:/var/lib/mysql
-  #   ports:
-  #     - "3308:3306"
-  #   networks: 
-  #     - php

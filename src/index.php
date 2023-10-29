@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -31,6 +34,15 @@
 </head>
 
 <body>
+  <?php
+    if (isset($_SESSION['uploadMessage'])) {
+        $message = $_SESSION['uploadMessage'];
+        echo "<script>var uploadMessage = '$message';</script>";
+        // Limpe a variável de sessão após usá-la
+        unset($_SESSION['uploadMessage']);
+    }
+  ?>
+
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -167,6 +179,20 @@
     <div class="container">
       <div class="heading_container">
         <h2>
+          Sobre o projeto
+        </h2>
+          <div class="img-box">
+            <img src="images/logo_unifil.png"  alt="">
+          </div>
+        <h4 class="text-left">
+          O blog presente foi criado para o projeto de extensão apresentado a UNIFIL - Centro Universitário Filadélfia de Londrina, como um projeto de extensão busca solucionar problemas existentes, de interesse e necessidade da sociedade, ampliando a relação desta com a Universidad. O projeto consiste em criar um site que traga uma comunidade aberta, que leia e contribua com pesquisas e resumos na área de segurança da informação. Um espaço digital dedicado à busca do conhecimento compartilhado e colaborativo!
+        </h4>
+        <h4 class="text-left">
+           Resumindo nosso projeto é uma plataforma que visa reunir pesquisas, estudantes e entusiastas de segurança para compartilhar, colaborar e expandir as fronteiras da pesquisa de maneira acessível e inclusiva, trazendo uma estrutura mais coloquial e de fácil entendimento. Em um mundo em constante evolução, o conhecimento é um ativo valioso que todos devem ter a oportunidade de contribuir e acessar
+        </h4>
+      </div>
+      <div class="heading_container pt-5 mt-5">
+        <h2>
           O que fazemos ?
         </h2>
         <p>
@@ -296,45 +322,48 @@
         </form> -->
       </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-3 text-center">
-            <h1 class="mb-5">Listagem de pesquisas</h1>
-            <ul>
-            <?php
-                $pdfDirectory = 'uploads/';
-                $pdfFiles = glob($pdfDirectory . '*.pdf');
+    <div id="uploadSection" class="container mt-5">
+      <h1 class="text-center mb-5">Listagem de pesquisas</h1>
+      <div class="row">
+          <?php
+          $pdfDirectory = 'uploads/';
+          $pdfFiles = glob($pdfDirectory . '*.pdf');
 
-                if (empty($pdfFiles)) {
-                    echo "<p>Nenhum PDF encontrado.</p>";
-                } else {
-                    foreach ($pdfFiles as $pdfFile) {
-                        $pdfFileName = basename($pdfFile);
-                        echo "<li><a href='$pdfFile' download>$pdfFileName</a></li>";
-                    }
-                }
-            ?>
-            </ul>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col text-center">
-        <h2 class="mt-5">Enviar uma pesquisa</h2>
+          if (empty($pdfFiles)) {
+              echo "<p class='text-center'>Nenhum PDF encontrado.</p>";
+          } else {
+              foreach ($pdfFiles as $pdfFile) {
+                  $pdfFileName = basename($pdfFile);
+                  ?>
+                  <div class="col-md-4 mb-4">
+                      <div class="card text-center">
+                          <img style="margin:0 auto" src="images/pdf-ico.svg" class="card-img-top w-25 pt-2" alt="PDF Icon">
+                          <div class="card-body">
+                              <h5 class="card-title"><?php echo $pdfFileName; ?></h5>
+                              <a href="<?php echo $pdfFile; ?>" class="btn btn-primary" download>Baixar</a>
+                          </div>
+                      </div>
+                  </div>
+                  <?php
+              }
+          }
+          ?>
       </div>
-    </div>
-    <div class="mt-5 row justify-content-center">
-      <div class="col-6">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-          <div class="input-group mb-3">
-            <div class="custom-file">
-              <input placeholder="Escolher arquivo..." type="file" name="arquivo" class="custom-file-input"
-                id="arquivo">
-              <label class="custom-file-label" for="arquivo" aria-describedby="inputGroupFileAddon02">Escolha um
-                arquivo</label>
-            </div>
-            <div class="input-group-append">
-              <button type="submit" class="input-group-text">Enviar</button>
-            </div>
+
+      <div class="row justify-content-center mt-5">
+          <div class="col text-center">
+              <h2 class="pb-7">Enviar uma pesquisa</h2>
+              <p class="text-danger">Máximo 15mb</p>
           </div>
+      </div>
+    <div class="mt-2 row justify-content-center">
+      <div class="col-6">
+        <form action="upload.php" method="post" enctype="multipart/form-data" class="text-center">
+          <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile" name="arquivo">
+              <label class="custom-file-label" for="customFile">Escolha um arquivo</label>
+          </div>
+          <button type="submit" class="btn btn-primary mt-5 mb-4">Enviar</button>
         </form>
       </div>
     </div>
@@ -468,9 +497,27 @@
       </div>
     </div>
   </section>
-
   <!-- end info_section -->
 
+  <!-- modal -->
+  <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadModalLabel">Upload de arquivos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="uploadModalBody">
+          <!-- A mensagem de sucesso ou erro será inserida aqui -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -495,6 +542,17 @@
         }
       }
     });
+  $('.custom-file-input').on('change', function() { 
+      let fileName = $(this).val().split('\\').pop(); 
+      $(this).next('.custom-file-label').addClass("selected").html(fileName); 
+  });
+
+  window.onload = function() {
+      if (typeof uploadMessage !== 'undefined') {
+          document.getElementById('uploadModalBody').textContent = uploadMessage;
+          $('#uploadModal').modal('show');
+      }
+  };
   </script>
   <!-- end owl carousel script -->
 
