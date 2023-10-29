@@ -181,6 +181,7 @@ session_start();
         <h2>
           Sobre o projeto
         </h2>
+        <p>Para ver github do projeto: <a target="_blank" href="https://github.com/joao951951/blog-estatico-praticas-de-extensao"> Clique aqui </a></p>
           <div class="img-box">
             <img src="images/logo_unifil.png"  alt="">
           </div>
@@ -426,6 +427,13 @@ session_start();
   <section class="info_section ">
     <div class="container">
       <div class="row">
+      <div class="col-md-3">
+          <div class="info_contact">
+            <a href="https://unifil.br" target="_blank">
+              <img src="images/unifil-placeholder.jpg" class="w-75" alt="">
+            </a>
+          </div>
+        </div>
         <div class="col-md-3">
           <div class="info_contact">
             <h5 id="contato-info">
