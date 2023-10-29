@@ -189,7 +189,7 @@ session_start();
           O blog presente foi criado para o projeto de extensão apresentado a UNIFIL - Centro Universitário Filadélfia de Londrina, como um projeto de extensão busca solucionar problemas existentes, de interesse e necessidade da sociedade, ampliando a relação desta com a Universidad. O projeto consiste em criar um site que traga uma comunidade aberta, que leia e contribua com pesquisas e resumos na área de segurança da informação. Um espaço digital dedicado à busca do conhecimento compartilhado e colaborativo!
         </h4>
         <h4 class="text-left">
-           Resumindo nosso projeto é uma plataforma que visa reunir pesquisas, estudantes e entusiastas de segurança para compartilhar, colaborar e expandir as fronteiras da pesquisa de maneira acessível e inclusiva, trazendo uma estrutura mais coloquial e de fácil entendimento. Em um mundo em constante evolução, o conhecimento é um ativo valioso que todos devem ter a oportunidade de contribuir e acessar
+           Resumindo nosso projeto é uma plataforma que visa reunir pesquisas, estudantes e entusiastas de segurança para compartilhar, colaborar e expandir as fronteiras da pesquisa de maneira acessível e inclusiva, trazendo uma estrutura mais coloquial e de fácil entendimento. Em um mundo em constante evolução, o conhecimento é um ativo valioso que todos devem ter a oportunidade de contribuir e acessar, assim é disponibilizado esta plataforma com intuito de todos poderem publicar suas pesquisas e acessar as já existentes.
         </h4>
       </div>
       <div class="heading_container pt-5 mt-5">
